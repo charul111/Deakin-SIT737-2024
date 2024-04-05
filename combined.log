@@ -1,0 +1,21 @@
+{"level":"info","message":"Performing modulo operation with 10 and 3","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameters provided","service":"calculator-microservice"}
+{"level":"info","message":"Performing exponentiate operation with 2 and 3","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameters provided","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameter provided for squareRoot operation","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameter provided for squareRoot operation","service":"calculator-microservice"}
+{"level":"error","message":"Invalid parameter provided for squareRoot operation","service":"calculator-microservice"}
+{"level":"error","message":"Error: Invalid parameter provided for squareRoot operation","service":"calculator-microservice"}
+{"level":"info","message":"Performing squareRoot operation with 25 and undefined","service":"calculator-microservice"}
+{"level":"info","message":"Performing squareRoot operation with 81 and undefined","service":"calculator-microservice"}
+{"level":"info","message":"Performing squareRoot operation with 82 and undefined","service":"calculator-microservice"}
