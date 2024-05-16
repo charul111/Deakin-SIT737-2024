@@ -1,40 +1,40 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo  # The name of the StatefulSet
   labels:
-    app: mongo
+    app: mongo  # Labels used to identify this StatefulSet
 spec:
   selector:
     matchLabels:
-      app: mongo
-  serviceName: "mongo"
-  replicas: 3
+      app: mongo  # The selector used to identify the pods managed by this StatefulSet
+  serviceName: "mongo"  # The name of the headless service used for the StatefulSet
+  replicas: 3  # The number of pod replicas to create
   template:
     metadata:
       labels:
-        app: mongo
+        app: mongo  # Labels for the pod template
     spec:
       containers:
-        - name: mongo
-          image: mongo:4.0.8
+        - name: mongo  # The name of the container
+          image: mongo:4.0.8  # The image of the MongoDB container
           startupProbe:
             exec:
               command:
                 - mongo
                 - --eval
-                - "db.adminCommand('ping')"
-            initialDelaySeconds: 1
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 2
+                - "db.adminCommand('ping')"  # Command to check if the MongoDB service has started
+            initialDelaySeconds: 1  # Initial delay before the first probe
+            periodSeconds: 10  # Period between probes
+            timeoutSeconds: 5  # Timeout for each probe
+            successThreshold: 1  # Number of successful probes before the container is considered started
+            failureThreshold: 2  # Number of failed probes before the container is considered failed
           livenessProbe:
             exec:
               command:
                 - mongo
                 - --eval
-                - "db.adminCommand('ping')"
+                - "db.adminCommand('ping')"  # Command to check if the MongoDB service is alive
             initialDelaySeconds: 1
             periodSeconds: 10
             timeoutSeconds: 5
@@ -45,46 +45,46 @@ spec:
               command:
                 - mongo
                 - --eval
-                - "db.adminCommand('ping')"
+                - "db.adminCommand('ping')"  # Command to check if the MongoDB service is ready to accept traffic
             initialDelaySeconds: 1
             periodSeconds: 10
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 2
           env:
-            - name: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_USERNAME  # Environment variable for MongoDB root username
               valueFrom:
                 configMapKeyRef:
-                  key: username
-                  name: mongodb-config
-            - name: MONGO_INITDB_ROOT_PASSWORD
+                  key: username  # Key in the ConfigMap
+                  name: mongodb-config  # Name of the ConfigMap
+            - name: MONGO_INITDB_ROOT_PASSWORD  # Environment variable for MongoDB root password
               valueFrom:
                 secretKeyRef:
-                  key: password
-                  name: mongodb-secret
+                  key: password  # Key in the Secret
+                  name: mongodb-secret  # Name of the Secret
           command:
             - mongod
-            - "--bind_ip_all"
+            - "--bind_ip_all"  # Bind MongoDB to all IP addresses
             - "--replSet"
-            - rs0
+            - rs0  # Name of the replica set
           volumeMounts:
-            - name: mongo-volume
-              mountPath: /data/db
-            - name: mongodb-config
-              mountPath: /etc/mongo
+            - name: mongo-volume  # Name of the volume mount
+              mountPath: /data/db  # Path where the volume will be mounted
+            - name: mongodb-config  # Mount the configuration volume
+              mountPath: /etc/mongo  # Path for the configuration
       volumes:
-        - name: mongodb-config
+        - name: mongodb-config  # Define a volume from ConfigMap
           configMap:
-            name: mongodb-config
+            name: mongodb-config  # Name of the ConfigMap
             items:
-              - key: mongodb.conf
-                path: mongodb.conf
+              - key: mongodb.conf  # Key in the ConfigMap
+                path: mongodb.conf  # Path to place the file in the container
   volumeClaimTemplates:
     - metadata:
-        name: mongo-volume
+        name: mongo-volume  # Name of the PersistentVolumeClaim template
       spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: demo-storage
+        accessModes: ["ReadWriteOnce"]  # Access mode for the PVC
+        storageClassName: demo-storage  # Storage class for the PVC
         resources:
           requests:
-            storage: 1Gi
+            storage: 1Gi  # Requested storage size

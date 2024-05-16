@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo
+  name: mongo  # The name of the Service
 spec:
   ports:
-    - name: mongo
-      port: 27017
-      targetPort: 27017
-  clusterIP: None
+    - name: mongo  # The name of the port
+      port: 27017  # The port that the service will expose
+      targetPort: 27017  # The port on the container that the service will forward traffic to
+  clusterIP: None  # This makes the service headless, allowing direct access to the pods
   selector:
-    app: mongo
+    app: mongo  # The selector used to identify the pods that this service will route to

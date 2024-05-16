@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-pvc
+  name: mongo-pvc  # The name of the PersistentVolumeClaim
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteMany  # Access mode indicating the volume can be mounted as read-write by many nodes
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: "demo-storage"
-  
+      storage: 1Gi  # The amount of storage requested for the PersistentVolumeClaim
+  storageClassName: "demo-storage"  # The storage class to use for the PersistentVolumeClaim
