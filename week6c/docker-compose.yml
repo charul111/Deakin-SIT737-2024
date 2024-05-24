@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3040:3040"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 80s  # Time between health check attempts
+      timeout: 40s   # Maximum time to wait for the health check command to complete
+      retries: 12    # Number of retries before considering the container unhealthy
+      start_period: 60s  # Time to wait after the container starts before performing health checks
